@@ -23,5 +23,11 @@ namespace frmParent
             Frmuser frmuser = new Frmuser();
             frmuser.Show();
         }
+
+        private void creerUneCarteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frmuser frmuser = new Frmuser();
+            frmuser.Show();
+        }
     }
 }

@@ -11,13 +11,14 @@ using System.Xml.Linq;
 
 namespace CC01.DAL
 {
-   public class CarteEtudiantDAO
+   public class EtudiantDAO
     {
-        public static List<CarteEtudiant> carteEtudiants;
+        
+        public static List<Etudiant> Etudiants;
         private const string FILE_NAME = @"Carte.json";
         private readonly string dbFoler;
         private FileInfo file;
-        public CarteEtudiantDAO(string dbFolder)
+        public EtudiantDAO(string dbFolder)
         {
             this.dbFoler = dbFolder;
             file = new FileInfo(Path.Combine(this.dbFoler, FILE_NAME));
@@ -35,27 +36,27 @@ namespace CC01.DAL
                 using(StreamReader sr=new StreamReader(file.FullName))
                 {
                     string json = sr.ReadToEnd();
-                    carteEtudiants = JsonConvert.DeserializeObject<List<CarteEtudiant>>(json);
+                    Etudiants = JsonConvert.DeserializeObject<List<Etudiant>>(json);
                 }
 
             }
-            if(carteEtudiants==null)
+            if(Etudiants==null)
             {
-                carteEtudiants = new List<CarteEtudiant>();
+                Etudiants = new List<Etudiant>();
             }
 
         }
-        public void Set(CarteEtudiant oldcarteEtudiant,CarteEtudiant newcarteEtudiant)
+        public void Set(Etudiant oldcarteEtudiant,Etudiant newcarteEtudiant)
         {
-            var oldIndex = carteEtudiants.IndexOf(oldcarteEtudiant);
-            var newIndex = carteEtudiants.IndexOf(newcarteEtudiant);
+            var oldIndex = Etudiants.IndexOf(oldcarteEtudiant);
+            var newIndex = Etudiants.IndexOf(newcarteEtudiant);
             if(oldIndex<0)
             
                 throw new KeyNotFoundException("ce matricule n'existe pas");
 
             if (newIndex >= 0 && oldIndex != newIndex)
                 throw new DuplicateNameException("ce matricule existe deja");
-            carteEtudiants[oldIndex] = newcarteEtudiant;
+            Etudiants[oldIndex] = newcarteEtudiant;
             Save();
 
         }
@@ -63,32 +64,32 @@ namespace CC01.DAL
         {
            using(StreamWriter sw=new StreamWriter(file.FullName,false))
             {
-                string json = JsonConvert.SerializeObject(carteEtudiants);
+                string json = JsonConvert.SerializeObject(Etudiants);
                 sw.WriteLine(json);
             }
 
         }
-        public void Remove(CarteEtudiant carteEtudiant)
+        public void Remove(Etudiant carteEtudiant)
         {
-            carteEtudiants.Remove(carteEtudiant);
+            Etudiants.Remove(carteEtudiant);
             Save();
         }
-        public void Add(CarteEtudiant carteEtudiant)
+        public void Add(Etudiant carteEtudiant)
         {
-            var index = carteEtudiants.IndexOf(carteEtudiant);
+            var index = Etudiants.IndexOf(carteEtudiant);
             if(index>=0)
             
                 throw new DuplicateNameException("ce matricule n'existe pas ");
-                carteEtudiants.Add(carteEtudiant);
+                Etudiants.Add(carteEtudiant);
                 Save();
         }
-        public IEnumerable<CarteEtudiant> Find()
+        public IEnumerable<Etudiant> Find()
         {
-            return new List<CarteEtudiant>(carteEtudiants);
+            return new List<Etudiant>(Etudiants);
         }
-        public IEnumerable<CarteEtudiant> Find(Func<CarteEtudiant,bool>Predicate)
+        public IEnumerable<Etudiant> Find(Func<Etudiant,bool>Predicate)
         {
-            return new List<CarteEtudiant>(carteEtudiants.Where(Predicate).ToArray());
+            return new List<Etudiant>(Etudiants.Where(Predicate).ToArray());
         }
           
 

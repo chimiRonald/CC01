@@ -9,11 +9,18 @@ namespace CC01.BO
    public abstract class Ecole
     {
         public string Nom { get; set; }
+        public byte[] Picture { get; set; }
+        public string Addresse { get; set; }
+        public string Section { get; set; }
 
-        public Ecole(string nom)
+        protected Ecole(string nom, byte[] picture, string addresse, string section)
         {
             Nom = nom;
+            Picture = picture;
+            Addresse = addresse;
+            Section = section;
         }
+
         public Ecole()
         {
 
