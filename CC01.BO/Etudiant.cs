@@ -42,10 +42,10 @@ namespace CC01.BO
         public Etudiant(string v1, string text1, string text2, string text3, byte[] v2)
         {
             this.Matricule = v1;
-            this.Nom = text1;
+            this.NomEtudiant = text1;
             this.Prenom = text2;
             this.Classe = text3;
-            this.Picture = v2;
+            this.PhotoEtudiant = v2;
            // this.filename = filename;
         }
 

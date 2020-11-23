@@ -14,10 +14,12 @@ namespace CC01.DAL
    public class EtudiantDAO
     {
         
-        public static List<Etudiant> Etudiants;
+               public static List<Etudiant> Etudiants;
+
         private const string FILE_NAME = @"Carte.json";
         private readonly string dbFoler;
         private FileInfo file;
+
         public EtudiantDAO(string dbFolder)
         {
             this.dbFoler = dbFolder;

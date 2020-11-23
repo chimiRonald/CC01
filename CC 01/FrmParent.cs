@@ -19,11 +19,18 @@ namespace CC_01
 
         private void eTUDIANTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+            FrmEtudiant form1 = new FrmEtudiant();
             form1.MdiParent = this;
             form1.Show();
 
 
+        }
+
+        private void eCOLEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEcole f = new FrmEcole();
+            f.MdiParent = this;
+            f.Show();
         }
     }
 }

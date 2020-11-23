@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CC01.BO
 {
-   public abstract class Ecole
+   public class Ecole
     {
         public string Nom { get; set; }
         public byte[] Picture { get; set; }
