@@ -48,6 +48,9 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnRaffraichir = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnImprimer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -116,6 +119,7 @@
             this.txtRecherche.Name = "txtRecherche";
             this.txtRecherche.Size = new System.Drawing.Size(464, 20);
             this.txtRecherche.TabIndex = 9;
+            this.txtRecherche.TextChanged += new System.EventHandler(this.txtRecherche_TextChanged);
             // 
             // label4
             // 
@@ -166,6 +170,7 @@
             this.btnSupp.TabIndex = 14;
             this.btnSupp.Text = "SUPPRIMER";
             this.btnSupp.UseVisualStyleBackColor = true;
+            this.btnSupp.Click += new System.EventHandler(this.btnSupp_Click);
             // 
             // btnFermer
             // 
@@ -222,12 +227,45 @@
             this.label8.TabIndex = 20;
             this.label8.Text = "FORMULAIRE D\'INSCRPTION";
             // 
+            // btnRaffraichir
+            // 
+            this.btnRaffraichir.Location = new System.Drawing.Point(619, 318);
+            this.btnRaffraichir.Name = "btnRaffraichir";
+            this.btnRaffraichir.Size = new System.Drawing.Size(88, 56);
+            this.btnRaffraichir.TabIndex = 21;
+            this.btnRaffraichir.Text = "Raffraichir";
+            this.btnRaffraichir.UseVisualStyleBackColor = true;
+            this.btnRaffraichir.Click += new System.EventHandler(this.btnRaffraichir_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(631, 27);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 22;
+            this.btnEdit.Text = "Editer";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnImprimer
+            // 
+            this.btnImprimer.Location = new System.Drawing.Point(710, 489);
+            this.btnImprimer.Name = "btnImprimer";
+            this.btnImprimer.Size = new System.Drawing.Size(75, 23);
+            this.btnImprimer.TabIndex = 23;
+            this.btnImprimer.Text = "Imprimer";
+            this.btnImprimer.UseVisualStyleBackColor = true;
+            this.btnImprimer.Click += new System.EventHandler(this.btnImprimer_Click);
+            // 
             // FrmEtudiant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(797, 542);
+            this.Controls.Add(this.btnImprimer);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnRaffraichir);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.linkLabel1);
@@ -280,5 +318,8 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnRaffraichir;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnImprimer;
     }
 }

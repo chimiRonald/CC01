@@ -79,7 +79,7 @@
             this.fermerToolStripMenuItem.Name = "fermerToolStripMenuItem";
             this.fermerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fermerToolStripMenuItem.Text = "fermer";
-            this.fermerToolStripMenuItem.Click += new System.EventHandler(this.fermerToolStripMenuItem_Click);
+       //     this.fermerToolStripMenuItem.Click += new System.EventHandler(this.fermerToolStripMenuItem_Click);
             // 
             // rechercherToolStripMenuItem
             // 
@@ -95,14 +95,14 @@
             this.eTUDIANTToolStripMenuItem1.Name = "eTUDIANTToolStripMenuItem1";
             this.eTUDIANTToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.eTUDIANTToolStripMenuItem1.Text = "ETUDIANT";
-            this.eTUDIANTToolStripMenuItem1.Click += new System.EventHandler(this.eTUDIANTToolStripMenuItem1_Click);
+         //   this.eTUDIANTToolStripMenuItem1.Click += new System.EventHandler(this.eTUDIANTToolStripMenuItem1_Click);
             // 
             // eCOLEToolStripMenuItem1
             // 
             this.eCOLEToolStripMenuItem1.Name = "eCOLEToolStripMenuItem1";
             this.eCOLEToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.eCOLEToolStripMenuItem1.Text = "ECOLE";
-            this.eCOLEToolStripMenuItem1.Click += new System.EventHandler(this.eCOLEToolStripMenuItem1_Click);
+           // this.eCOLEToolStripMenuItem1.Click += new System.EventHandler(this.eCOLEToolStripMenuItem1_Click);
             // 
             // FrmParent
             // 

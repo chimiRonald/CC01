@@ -12,86 +12,48 @@ namespace CC01.DAL
 {
  public  class EcoleDAO
     {
-
-        public static List<Ecole> Ecoles;
-
-        private const string FILE_NAME1 = @"Ecoles.json";
-        private readonly string dbFoler1;
-        private FileInfo file1;
-
+        private Ecole ecole;
+        private const string FILE_NAME = @"ecole.json";
+        private readonly string dbFolder;
+        private FileInfo file;
         public EcoleDAO(string dbFolder)
         {
-            this.dbFoler1 = dbFolder;
-            file1 = new FileInfo(Path.Combine(this.dbFoler1, FILE_NAME1));
-            if (!file1.Directory.Exists)
+            this.dbFolder = dbFolder;
+            file = new FileInfo(Path.Combine(this.dbFolder, FILE_NAME));
+            if (!file.Directory.Exists)
             {
-                file1.Directory.Create();
+                file.Directory.Create();
             }
-            if (!file1.Exists)
+            if (!file.Exists)
             {
-                file1.Create().Close();
-                file1.Refresh();
+                file.Create().Close();
+                file.Refresh();
             }
-            if (file1.Length > 0)
+            if (file.Length > 0)
             {
-                using (StreamReader sr = new StreamReader(file1.FullName))
+                using (StreamReader sr = new StreamReader(file.FullName))
                 {
-                    string json1 = sr.ReadToEnd();
-                    Ecoles = JsonConvert.DeserializeObject<List<Ecole>>(json1);
+                    string json = sr.ReadToEnd();
+                    ecole = JsonConvert.DeserializeObject<Ecole>(json);
                 }
-
             }
-            if (Ecoles == null)
-            {
-                Ecoles = new List<Ecole>();
-            }
-
         }
-        public void Set(Ecole oldEcole, Ecole newEcole)
-        {
-            var oldIndex = Ecoles.IndexOf(oldEcole);
-            var newIndex = Ecoles.IndexOf(newEcole);
-            if (oldIndex < 0)
 
-                throw new KeyNotFoundException("cette ecole n'existe pas");
-
-            if (newIndex >= 0 && oldIndex != newIndex)
-                throw new DuplicateNameException("cette ecole existe deja");
-            Ecoles[oldIndex] = newEcole;
-            Save();
-
-        }
-        public void Save()
-        {
-            using (StreamWriter sw = new StreamWriter(file1.FullName, false))
-            {
-                string json = JsonConvert.SerializeObject(Ecoles);
-                sw.WriteLine(json);
-            }
-
-        }
-        public void Remove(Ecole ecole)
-        {
-            Ecoles.Remove(ecole);
-            Save();
-        }
         public void Add(Ecole ecole)
         {
-            var index = Ecoles.IndexOf(ecole);
-            if (index >= 0)
+            using (StreamWriter sw = new StreamWriter(file.FullName, false))
+            {
+                string json = JsonConvert.SerializeObject(ecole);
+                sw.WriteLine(json);
+            }
+        }
 
-                throw new DuplicateNameException("cette ecole n'existe pas ");
-            Ecoles.Add(ecole);
-            Save();
-        }
-        public IEnumerable<Ecole> Find()
+        public Ecole Get()
         {
-            return new List<Ecole>(Ecoles);
+            return ecole;
         }
-        public IEnumerable<Ecole> Find(Func<Ecole, bool> Predicate)
-        {
-            return new List<Ecole>(Ecoles.Where(Predicate).ToArray());
-        }
+
+
 
     }
 }

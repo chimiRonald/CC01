@@ -9,11 +9,11 @@ namespace CC01.BO
    public class Ecole
     {
         public string Nom { get; set; }
-        public byte[] Picture { get; set; }
+        public string Picture { get; set; }
         public string Addresse { get; set; }
         public string Section { get; set; }
 
-        protected Ecole(string nom, byte[] picture, string addresse, string section)
+        public Ecole(string nom, string picture, string addresse, string section)
         {
             Nom = nom;
             Picture = picture;

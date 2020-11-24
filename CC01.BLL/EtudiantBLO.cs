@@ -10,32 +10,41 @@ namespace CC01.BLL
 {
    public  class EtudiantBLO
     {
-        EtudiantDAO EtudiantRepo;
-        public  EtudiantBLO(string dbFolder)
+        EtudiantDAO etudiantRepo;
+        public EtudiantBLO(string dbFolder)
         {
-            EtudiantRepo = new EtudiantDAO(dbFolder);
-            
+            etudiantRepo = new EtudiantDAO(dbFolder);
         }
-        public void CreateCarteEtudiant(Etudiant  carteEtudiant)
+        public void CreateEtudiant(Etudiant product)
         {
-            EtudiantRepo.Add(carteEtudiant);
+            etudiantRepo.Add(product);
+        }
 
-        }
-        public void EditEtudiant(Etudiant oldEtudiant, Etudiant newEtudiant )
+        public void DeleteEtudiant(Etudiant product)
         {
-            EtudiantRepo.Set(oldEtudiant, newEtudiant);
+            etudiantRepo.Remove(product);
         }
-        public void DeleteCarteEtudiant (Etudiant carteEtudiant)
+
+
+        public IEnumerable<Etudiant> GetAllEtudiants()
         {
-            EtudiantRepo.Remove(carteEtudiant);
+            return etudiantRepo.Find();
         }
-        public IEnumerable<Etudiant>GetCarteEtudiants()
+
+
+        public IEnumerable<Etudiant> GetByMatricule(string matricule)
         {
-            return EtudiantRepo.Find();
+            return etudiantRepo.Find(x => x.Matricule == matricule);
         }
-        public IEnumerable<Etudiant> GetBy(Func<Etudiant,bool>Predicate)
+
+        public IEnumerable<Etudiant> GetBy(Func<Etudiant, bool> predicate)
         {
-            return EtudiantRepo.Find(Predicate);
+            return etudiantRepo.Find(predicate);
+        }
+
+        public void EditProduct(Etudiant oldEtudiant, Etudiant newEtudiant)
+        {
+            etudiantRepo.Set(oldEtudiant, newEtudiant);
         }
     }
 }

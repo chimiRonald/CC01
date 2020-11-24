@@ -13,87 +13,82 @@ namespace CC01.DAL
 {
    public class EtudiantDAO
     {
-        
-               public static List<Etudiant> Etudiants;
-
-        private const string FILE_NAME = @"Carte.json";
-        private readonly string dbFoler;
+        private static List<Etudiant> Etudiants;
+        private const string FILE_NAME = @"Etudiants.json";
+        private readonly string dbFolder;
         private FileInfo file;
-
         public EtudiantDAO(string dbFolder)
         {
-            this.dbFoler = dbFolder;
-            file = new FileInfo(Path.Combine(this.dbFoler, FILE_NAME));
-            if(!file.Directory.Exists)
+            this.dbFolder = dbFolder;
+            file = new FileInfo(Path.Combine(this.dbFolder, FILE_NAME));
+            if (!file.Directory.Exists)
             {
                 file.Directory.Create();
             }
-            if(!file.Exists)
+            if (!file.Exists)
             {
                 file.Create().Close();
                 file.Refresh();
             }
-            if(file.Length>0)
+            if (file.Length > 0)
             {
-                using(StreamReader sr=new StreamReader(file.FullName))
+                using (StreamReader sr = new StreamReader(file.FullName))
                 {
                     string json = sr.ReadToEnd();
                     Etudiants = JsonConvert.DeserializeObject<List<Etudiant>>(json);
                 }
-
             }
-            if(Etudiants==null)
+            if (Etudiants == null)
             {
                 Etudiants = new List<Etudiant>();
             }
-
         }
-        public void Set(Etudiant oldcarteEtudiant,Etudiant newcarteEtudiant)
-        {
-            var oldIndex = Etudiants.IndexOf(oldcarteEtudiant);
-            var newIndex = Etudiants.IndexOf(newcarteEtudiant);
-            if(oldIndex<0)
-            
-                throw new KeyNotFoundException("ce matricule n'existe pas");
 
+        public void Set(Etudiant oldEtudiant, Etudiant newEtudiant)
+        {
+            var oldIndex = Etudiants.IndexOf(oldEtudiant);
+            var newIndex = Etudiants.IndexOf(newEtudiant);
+            if (oldIndex < 0)
+                throw new KeyNotFoundException("The students does'texist !");
             if (newIndex >= 0 && oldIndex != newIndex)
-                throw new DuplicateNameException("ce matricule existe deja");
-            Etudiants[oldIndex] = newcarteEtudiant;
+                throw new DuplicateNameException("This student matricule already exists !");
+            Etudiants[oldIndex] = newEtudiant;
             Save();
-
         }
-        public void Save()
+
+        public void Add(Etudiant etudiant)
         {
-           using(StreamWriter sw=new StreamWriter(file.FullName,false))
+            var index = Etudiants.IndexOf(etudiant);
+            if (index >= 0)
+                throw new DuplicateNameException("This student matricule already exists !");
+            Etudiants.Add(etudiant);
+            Save();
+        }
+
+        private void Save()
+        {
+            using (StreamWriter sw = new StreamWriter(file.FullName, false))
             {
                 string json = JsonConvert.SerializeObject(Etudiants);
                 sw.WriteLine(json);
             }
-
         }
-        public void Remove(Etudiant carteEtudiant)
+
+        public void Remove(Etudiant etudiant)
         {
-            Etudiants.Remove(carteEtudiant);
+            Etudiants.Remove(etudiant);//base sur Product.Equals redefini
             Save();
         }
-        public void Add(Etudiant carteEtudiant)
-        {
-            var index = Etudiants.IndexOf(carteEtudiant);
-            if(index>=0)
-            
-                throw new DuplicateNameException("ce matricule n'existe pas ");
-                Etudiants.Add(carteEtudiant);
-                Save();
-        }
+
         public IEnumerable<Etudiant> Find()
         {
             return new List<Etudiant>(Etudiants);
         }
-        public IEnumerable<Etudiant> Find(Func<Etudiant,bool>Predicate)
+
+        public IEnumerable<Etudiant> Find(Func<Etudiant, bool> predicate)
         {
-            return new List<Etudiant>(Etudiants.Where(Predicate).ToArray());
+            return new List<Etudiant>(Etudiants.Where(predicate).ToArray());
         }
-          
 
 
     }
